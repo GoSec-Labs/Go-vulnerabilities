@@ -1,9 +1,9 @@
 ## 🔍 Step 1: Detection – “Something Feels Off”
 Ask yourself:
-- ❓ Is the app crashing, panicking, or behaving weirdly?
-- 🧪 Did you try fuzzing / random inputs and get crashes?
-- 📊 Are there unexplained performance drops, gas drains, or memory spikes?
-- 💬 Did someone report a bug, or did a security tool flag something?
+- Is the app crashing, panicking, or behaving weirdly?
+- Did you try fuzzing / random inputs and get crashes?
+- Are there unexplained performance drops, gas drains, or memory spikes?
+- Did someone report a bug, or did a security tool flag something?
 
 📦 Tools that help:
 - `gosec` (static code scanner)
@@ -16,8 +16,8 @@ Ask yourself:
 
 ## 🧠 Step 2: Understand the Vulnerability
 Ask:
-- 🧬 What part of the system is affected? (auth, crypto, RPC, DB?)
-- 🧨 What *could* happen if this vuln is exploited?
+- What part of the system is affected? (auth, crypto, RPC, DB?)
+- What *could* happen if this vuln is exploited?
   - Denial of service?
   - Key leakage?
   - Invalid transactions?
