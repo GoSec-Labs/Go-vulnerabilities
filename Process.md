@@ -1,3 +1,34 @@
+Vulnerability Title
+
+Severity Rating (e.g., Critical, with CVSS if known)
+
+Description
+
+Exploitation Goals
+
+Affected Components
+
+Vulnerable Code/Configuration Example
+
+Proof of Concept (PoC)
+
+Scope & Impact
+
+Scoping Methods & Testing Techniques
+
+Risk Classification (e.g., OWASP/API Top 10, STRIDE, CVSS)
+
+Remediation Recommendation
+
+How to Fix (Code-level or Config)
+
+Summary
+
+References
+
+
+
+
 ## 🔍 Step 1: Detection – “Something Feels Off”
 Ask yourself:
 - Is the app crashing, panicking, or behaving weirdly?
@@ -91,3 +122,7 @@ Would you like me to scaffold your first vulnerability example in the repo? Like
 - Files: `vuln.go`, `README.md`
 
 Let’s start building it together.
+
+
+
+
