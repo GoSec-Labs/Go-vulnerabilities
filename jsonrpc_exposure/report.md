@@ -12,7 +12,13 @@
 
 ## Scoping Methods 
 
+### Testing Method
+
 ## Classification of Risk 
+
+## Remediation Recommendations 
+
+## 
 
 ## 🧠 Summary
 The target backend exposes a JSON-RPC endpoint (`8545`) publicly without authentication or access control.
