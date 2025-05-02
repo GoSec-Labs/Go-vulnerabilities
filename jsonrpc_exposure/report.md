@@ -29,7 +29,7 @@
 > An **Insecure JSON-RPC Exposure** occurs when a blockchain node or backend exposes its JSON-RPC interface to the internet **without any authentication, IP filtering, or TLS encryption**. This opens the door to **unauthorized execution of sensitive methods**, such as retrieving private data, sending transactions, or overloading the node.
 
 
-### Description for Beginners (5-year-old version):
+### Description for Beginners:
 
 > Think of your blockchain node like a phone 📞. JSON-RPC is how apps call it. If anyone on the internet can call it **without asking permission**, they might **steal your coins**, **spam your system**, or **shut it down**. You left the door open 🚪 — now anyone can come in.
 
