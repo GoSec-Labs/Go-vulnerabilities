@@ -11,7 +11,6 @@
 | **First Seen**   | Ongoing in Web3 since 2016+      |
 | **Status**       | Actively exploited in wild       |
 
----
 
 ###  **2. Severity Rating**
 
@@ -24,19 +23,16 @@
 | **Exploitability**      | Easy (1-step)                |
 | **Affected Nodes**      | Publicly exposed RPC nodes   |
 
----
 
 ### **3. Description**
 
 > An **Insecure JSON-RPC Exposure** occurs when a blockchain node or backend exposes its JSON-RPC interface to the internet **without any authentication, IP filtering, or TLS encryption**. This opens the door to **unauthorized execution of sensitive methods**, such as retrieving private data, sending transactions, or overloading the node.
 
----
 
 ### Description for Beginners (5-year-old version):
 
 > Think of your blockchain node like a phone 📞. JSON-RPC is how apps call it. If anyone on the internet can call it **without asking permission**, they might **steal your coins**, **spam your system**, or **shut it down**. You left the door open 🚪 — now anyone can come in.
 
----
 
 ### 🔎 Technical Description (for security pros):
 
@@ -51,7 +47,6 @@
   - Spam `eth_getLogs` to create Denial-of-Service (DoS)
   - Harvest information via `web3_clientVersion`, `net_listening`, etc.
 
----
 
 ###  Common Mistakes That Cause This
 
@@ -62,9 +57,7 @@
 | No Firewall            | Port 8545 open to internet               | Scanners/bots can find and abuse |
 | Dev Defaults in Prod   | RPC enabled during testing, forgotten    | Vulnerability left open unknowingly |
 
-Awesome Zakaria, let’s keep building. Here’s the next block in your high-impact audit report:
 
----
 
 ##  **4. Exploitation Goals**
 
@@ -78,7 +71,6 @@ An attacker exploiting this vulnerability can:
 | 4      | **Inject Fake or Signed Transactions**   | If account unlock features are enabled, transactions can be sent on behalf of the node |
 | 5      | **Relay Chain Surveillance**             | Index data from exposed nodes to feed bots or front-running engines         |
 
----
 
 ## **5. Affected Components or Files**
 
@@ -90,7 +82,6 @@ An attacker exploiting this vulnerability can:
 | **Firewall / Infra** | `iptables`, `UFW`, Cloud VPC firewall rules      | Missing deny rules for 8545, 8546      |
 | **Monitoring Dashboards** | `Prometheus`, `Grafana` on same node        | Side-channel info exposure             |
 
----
 
 ## **6. Vulnerable Code Snippet**
 
@@ -111,7 +102,6 @@ func main() {
 
 >  **Issue:** Binding to `:8545` exposes your JSON-RPC server to public internet.
 
----
 
 ### 🔴 Example 2 — Geth Launch Command (Ethereum Node)
 
@@ -122,7 +112,6 @@ geth --http --http.addr 0.0.0.0 --http.port 8545 --http.api "eth,web3,net"
 
 >  **Issue:** No IP restriction + no authentication = world-accessible JSON-RPC
 
----
 
 ### 🔴 Example 3 — Docker Compose (Bad Expose)
 
@@ -136,9 +125,6 @@ services:
 ```
 
 > 💣 **Issue:** Container exposing RPC interface directly to host network.
-
-Let’s continue, Zakaria! Here’s the next phase of the audit report — **detection and proof**.
-
 
 
 ## 🔍 **7. Detection Steps**
@@ -165,8 +151,6 @@ nmap -p 8545 --script http-jsonrpc-scan <target-ip>
 ```
 
 >  Checks for open JSON-RPC interface and responds to known methods.
-
----
 
 ###  7.3 Custom Go Scanner (Simple Proof)
 
@@ -195,7 +179,6 @@ func main() {
 
 > Returns a valid version response → exposed.
 
----
 
 ### 7.4 Metasploit Auxiliary Scanner (Optional)
 
@@ -228,7 +211,6 @@ curl -X POST http://<ip>:8545 \
   --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}'
 ```
 
----
 
 ### PoC Response (If Vulnerable)
 
@@ -240,7 +222,6 @@ curl -X POST http://<ip>:8545 \
 }
 ```
 
----
 
 ### Optional Critical PoC
 
@@ -282,7 +263,6 @@ Here's the next section of your high-impact vulnerability audit:
 http.ListenAndServe("127.0.0.1:8545", nil)
 ```
 
----
 
 ### ✅ Ethereum Geth – Harden Startup
 
@@ -296,7 +276,6 @@ geth \
   --authrpc.jwtsecret /secure/token.txt
 ```
 
----
 
 ### ✅ Use Firewall Rules
 
@@ -306,7 +285,6 @@ ufw deny 8545
 iptables -A INPUT -p tcp --dport 8545 -s 127.0.0.1 -j ACCEPT
 ```
 
----
 
 ### ✅ Apply Access Control in Go Server
 
@@ -323,7 +301,6 @@ func authMiddleware(next http.Handler) http.Handler {
 }
 ```
 
----
 
 ### ✅ Optional: Use NGINX Reverse Proxy with Auth
 
@@ -348,7 +325,6 @@ location /rpc/ {
 | **Docker Deployments**    | Common      | 🔴 Critical | Port-forwarding exposes internal RPC     |
 | **Cloud Instances**       | Very Common | 🔴 Critical | Public IPs often default open to world   |
 
----
 
 > 🎯 **Impact Summary**:  
 If this vulnerability exists, **an attacker can fully control the node**, overload it, extract sensitive data, or relay exploit paths through it — affecting **users, funds, and protocol stability**.
