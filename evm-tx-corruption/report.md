@@ -2,7 +2,7 @@
 Corrupted and Undefined Behavior in EVM Transactions
 
 ## Severity Rating
-- **Severity**: Critical
+- **Severity**: Critical 🔴
 - **Likelihood**: High
 - **Impact**: High
 - **Category**: Implementation Error
