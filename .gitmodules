@@ -1,0 +1,3 @@
+[submodule "evm-tx-corruption/lib/forge-std"]
+	path = evm-tx-corruption/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
