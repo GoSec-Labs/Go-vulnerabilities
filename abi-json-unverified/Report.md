@@ -349,4 +349,3 @@ A Go program that:
 
 These PoCs illustrate that the vulnerability is not merely theoretical and can lead to tangible adverse effects, ranging from service disruption to incorrect blockchain interactions.
 
-
