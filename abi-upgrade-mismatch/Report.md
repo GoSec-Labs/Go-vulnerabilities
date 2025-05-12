@@ -18,7 +18,7 @@ Clients (dApps, backend services, other contracts) interact with the proxy addre
 - Match a function selector but provide parameters of incorrect types, count, or order.
 - Lead to misinterpretation of return values or event data if their structures have changed.
     
-This isn't a flaw in the ABI JSON format itself (like in `abi-json-unverified` **6**) but a desynchronization between the client's expected interface and the contract's actual interface.**3**
+This isn't a flaw in the ABI JSON format itself (like in `abi-json-unverified` ) but a desynchronization between the client's expected interface and the contract's actual interface.
 
 ### **3. Common Mistakes That Cause This**
 
@@ -194,31 +194,31 @@ In this scenario, `contract.Transact` would likely build calldata for a two-argu
 
 ### **13. Summary**
 
-ABI Upgrade Mismatch occurs when clients (dApps, backends, other contracts) use an outdated ABI to interact with a smart contract that has been upgraded, typically via a proxy pattern.**1** This desynchronization leads to failed transactions, data misinterpretation, and operational disruptions because the client's understanding of the contract's functions and data structures no longer matches the actual on-chain implementation.**3** The primary cause is the failure to update client-side ABIs after a contract upgrade. Remediation involves updating clients with the correct ABI, while prevention focuses on robust ABI versioning, clear communication of changes, and thorough post-upgrade testing.**17**
+ABI Upgrade Mismatch occurs when clients (dApps, backends, other contracts) use an outdated ABI to interact with a smart contract that has been upgraded, typically via a proxy pattern. This desynchronization leads to failed transactions, data misinterpretation, and operational disruptions because the client's understanding of the contract's functions and data structures no longer matches the actual on-chain implementation. The primary cause is the failure to update client-side ABIs after a contract upgrade. Remediation involves updating clients with the correct ABI, while prevention focuses on robust ABI versioning, clear communication of changes, and thorough post-upgrade testing.
 
 ### **14. References**
 
-- **19** `github.com/ethereum/go-ethereum/blob/master/accounts/abi/abi.go`
-- **12** `github.com/oceanprotocol/ocean.py/issues/348`
-- **11** `22x.to/posts/solidity-abi-packing-errors-in-go/`
-- **11** `22x.to/posts/solidity-abi-packing-errors-in-go/`
-- **3** `arxiv.org/pdf/2406.05712`
-- **3** `arxiv.org/pdf/2406.05712`
-- **12** `github.com/oceanprotocol/ocean.py/issues/348`
-- **6** `rustsec.org/advisories/RUSTSEC-2024-0362.html`
-- **7** `metana.io/blog/upgrade-bugs/`
-- **10** `github.com/rainbow-me/rainbow/blob/develop/CHANGELOG.md`
-- **15** `www.quicknode.com/guides/ethereum-development/smart-contracts/different-ways-to-verify-smart-contract-code`
-- **2** `metamask.io/news/understanding-how-to-write-upgradable-smart-contracts`
-- **1** `www.quicknode.com/guides/ethereum-development/smart-contracts/an-introduction-to-upgradeable-smart-contracts`
-- **16** `nvd.nist.gov/vuln-metrics/cvss/v3-calculator`
-- **9** `arxiv.org/html/2411.18935v2`
-- **11** `22x.to/posts/solidity-abi-packing-errors-in-go/`
-- **4** `www.quicknode.com/guides/ethereum-development/smart-contracts/what-is-an-abi`
-- **8** `www.cachefly.com/news/the-complexities-of-abi-and-api-in-software-development/`
-- **5** `ethereum.stackexchange.com/questions/234/what-is-an-abi-and-why-is-it-needed-to-interact-with-contracts`
-- **17** `josnif.hashnode.dev/understanding-abi-and-bytecode-in-ethereum-smart-contract-development-concepts-tools-and-best-practices`
-- **14** `www.cyfrin.io/blog/what-happens-when-a-smart-contract-reverts`
-- **18** `osl.com/academy/article/understanding-opportunities-and-limitations-of-dapps`
-- **13** `build.avax.network/docs/dapps/smart-contract-dev/interact-golang-app`
-- **13** `build.avax.network/docs/dapps/smart-contract-dev/interact-golang-app`
+- `github.com/ethereum/go-ethereum/blob/master/accounts/abi/abi.go`
+- `github.com/oceanprotocol/ocean.py/issues/348`
+- `22x.to/posts/solidity-abi-packing-errors-in-go/`
+- `22x.to/posts/solidity-abi-packing-errors-in-go/`
+- `arxiv.org/pdf/2406.05712`
+- `arxiv.org/pdf/2406.05712`
+- `github.com/oceanprotocol/ocean.py/issues/348`
+- `rustsec.org/advisories/RUSTSEC-2024-0362.html`
+- `metana.io/blog/upgrade-bugs/`
+- `github.com/rainbow-me/rainbow/blob/develop/CHANGELOG.md`
+- `www.quicknode.com/guides/ethereum-development/smart-contracts/different-ways-to-verify-smart-contract-code`
+- `metamask.io/news/understanding-how-to-write-upgradable-smart-contracts`
+- `www.quicknode.com/guides/ethereum-development/smart-contracts/an-introduction-to-upgradeable-smart-contracts`
+- `nvd.nist.gov/vuln-metrics/cvss/v3-calculator`
+- `arxiv.org/html/2411.18935v2`
+- `22x.to/posts/solidity-abi-packing-errors-in-go/`
+- `www.quicknode.com/guides/ethereum-development/smart-contracts/what-is-an-abi`
+- `www.cachefly.com/news/the-complexities-of-abi-and-api-in-software-development/`
+- `ethereum.stackexchange.com/questions/234/what-is-an-abi-and-why-is-it-needed-to-interact-with-contracts`
+- `josnif.hashnode.dev/understanding-abi-and-bytecode-in-ethereum-smart-contract-development-concepts-tools-and-best-practices`
+- `www.cyfrin.io/blog/what-happens-when-a-smart-contract-reverts`
+- `osl.com/academy/article/understanding-opportunities-and-limitations-of-dapps`
+- `build.avax.network/docs/dapps/smart-contract-dev/interact-golang-app`
+- `build.avax.network/docs/dapps/smart-contract-dev/interact-golang-app`
