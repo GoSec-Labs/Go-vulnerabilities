@@ -8,7 +8,7 @@ The severity of API key leakage in public repositories is a significant concern,
 
 **Overall Severity:**
 
-High to Critical (`CVSS v3.1` Base Score typically ranging from 7.5 to 9.8)
+High🟠 to Critical🔴 (`CVSS v3.1` Base Score typically ranging from 7.5 to 9.8)
 
 **Reasoning:**
 
