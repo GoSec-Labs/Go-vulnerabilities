@@ -2,7 +2,7 @@
 
 ## **1. Severity Rating**
 
-- **Overall Severity:** High
+- **Overall Severity:** High🟠
 - **CVSS v3.1 Score:** 7.5
 - **CVSS v3.1 Vector:** `AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N`
     - **Attack Vector (AV): Network (N):** The vulnerability can often be exploited over a network if the encrypted data is transmitted.
@@ -91,7 +91,7 @@ An attacker exploiting an AES-CBC IV reuse vulnerability primarily aims to compr
     - Identifying file types with known headers (e.g., "PK" for ZIP files, "%PDF" for PDF files).
     - Recognizing structured data where initial fields are often the same (e.g., session tokens like `"session_id:"`, API keys like `"sk_live_..."`).
     - Determining if different encrypted records in a database share common leading information.
-3. **Partial Plaintext Recovery (Information Leakage):** By observing patterns and commonalities across multiple ciphertexts generated with a reused IV, an attacker can infer partial information about the plaintexts. For instance, if an attacker knows that a message is either "APPROVE" or "DENIED" (padded to a block), and they have an example ciphertext for "APPROVE" (with the reused IV), they can determine if other messages are also "APPROVE".**7**
+3. **Partial Plaintext Recovery (Information Leakage):** By observing patterns and commonalities across multiple ciphertexts generated with a reused IV, an attacker can infer partial information about the plaintexts. For instance, if an attacker knows that a message is either "APPROVE" or "DENIED" (padded to a block), and they have an example ciphertext for "APPROVE" (with the reused IV), they can determine if other messages are also "APPROVE".
 4. **Full Plaintext Recovery (with Predictable IVs and Chosen Plaintext):** In scenarios where the IV is predictable and the attacker can submit chosen plaintexts for encryption (a chosen-plaintext attack or CPA), they may be able to decrypt targeted ciphertext blocks. This is a more advanced attack but can lead to complete plaintext recovery for affected blocks. The BEAST attack is a practical example of this against TLS.
 5. **Facilitating Other Attacks:** Information gleaned from IV reuse might be used as a stepping stone for other attacks. For example, identifying the format or type of encrypted data could help an attacker focus subsequent cryptanalysis efforts or exploit other vulnerabilities related to how that data is processed.
 
@@ -445,7 +445,7 @@ The reuse of Initialization Vectors (IVs) in AES-CBC mode presents a significant
 | **Aspect** | **Details** |
 | --- | --- |
 | **CWE ID(s)** | **CWE-323: Reusing a Nonce, Key Pair in Encryption** **6**: This is the most direct classification, as IV reuse with the same key is precisely what occurs. <br> **CWE-329: Generation of Predictable IV with CBC Mode** : Applies if IVs are generated predictably (e.g., counters), rather than being truly random and unpredictable. <br> **CWE-327: Use of a Broken or Risky Cryptographic Algorithm**: While AES-CBC itself is not broken if used correctly, its implementation with IV reuse constitutes a broken or risky usage of the algorithm. <br> **CWE-1204: Generation of Weak Initialization Vector (IV)** : A reused or predictable IV is a form of weak IV. |
-| **Example CVSS v3.1 Score / Vector** | **7.5 (High)** / `AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N` (as detailed in Section 1). This reflects a network-exploitable vulnerability with low complexity, requiring no privileges or user interaction, leading to high confidentiality impact. |
+| **Example CVSS v3.1 Score / Vector** | **7.5 (High🟠)** / `AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N` (as detailed in Section 1). This reflects a network-exploitable vulnerability with low complexity, requiring no privileges or user interaction, leading to high confidentiality impact. |
 | **OWASP Top 10 2021** | **A02:2021 – Cryptographic Failures**. This category explicitly includes scenarios where "initialization vectors [are] ignored, reused, or not generated sufficiently secure for the cryptographic mode of operation." |
 
 This classification underscores the criticality of addressing IV reuse vulnerabilities promptly.
