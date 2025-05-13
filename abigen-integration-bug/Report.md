@@ -4,7 +4,7 @@
 
 **2. Severity Rating**
 
-- **Overall Severity: High**
+- **Overall Severity: High🟠**
     - **Reasoning:** This vulnerability directly leads to a Denial of Service (DoS) by crashing the Go application. While it might not lead to direct data theft, the high impact on service availability for critical applications warrants a "High" severity. The likelihood of encountering this bug is medium, as it depends on using older `abigen` versions and specific smart contract interaction patterns.
 
 **3. Description**
@@ -264,7 +264,7 @@ This Proof of Concept (PoC) shows how the "abigen-integration-bug" can be trigge
     
     ```Bash
     
-    `# Assuming solc (Solidity compiler) is installed and the vulnerable abigen is in your system's PATH
+    # Assuming solc (Solidity compiler) is installed and the vulnerable abigen is in your system's PATH
     solc --abi PoCContract.sol -o build/
     solc --bin PoCContract.sol -o build/
     # Replace 'pocpackage' with your desired Go package name

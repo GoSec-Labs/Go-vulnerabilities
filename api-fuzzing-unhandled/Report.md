@@ -2,19 +2,19 @@
 
 ## **1. Severity Rating**
 
-**Overall Severity: High**
+**Overall Severity: High🟠**
 
-The "api-fuzzing-unhandled" vulnerability class in Golang infrastructure is rated as **High**. This rating is predicated on the significant potential for Denial of Service (DoS), the possibility of sensitive information disclosure, and, in certain scenarios, Remote Code Execution (RCE). The ease with which automated fuzzing tools can discover and exploit these weaknesses, particularly when fundamental input validation and resource limiting mechanisms are absent, contributes to this severity. A common manifestation, DoS through resource exhaustion, typically scores around 7.5 (High) on the Common Vulnerability Scoring System (CVSS v3.1). However, if fuzzing uncovers pathways to RCE, the CVSS score can escalate to Critical (9.0-10.0).
+The "api-fuzzing-unhandled" vulnerability class in Golang infrastructure is rated as **High**. This rating is predicated on the significant potential for Denial of Service (DoS), the possibility of sensitive information disclosure, and, in certain scenarios, Remote Code Execution (RCE). The ease with which automated fuzzing tools can discover and exploit these weaknesses, particularly when fundamental input validation and resource limiting mechanisms are absent, contributes to this severity. A common manifestation, DoS through resource exhaustion, typically scores around 7.5 (High🟠) on the Common Vulnerability Scoring System (CVSS v3.1). However, if fuzzing uncovers pathways to RCE, the CVSS score can escalate to Critical (9.0-10.0).
 
 ## **2. Description**
 
-API fuzzing, also known as fuzz testing for APIs, is a dynamic software testing methodology that involves sending a multitude of malformed, unexpected, or random data inputs to an Application Programming Interface (API) to uncover defects, vulnerabilities, and other operational issues.**1** The "api-fuzzing-unhandled" vulnerability signifies that the Golang API infrastructure is not adequately designed or implemented to gracefully handle such inputs. Instead of rejecting anomalous data or managing errors robustly, the API may crash, hang, leak information, or exhibit other unintended behaviors.
+API fuzzing, also known as fuzz testing for APIs, is a dynamic software testing methodology that involves sending a multitude of malformed, unexpected, or random data inputs to an Application Programming Interface (API) to uncover defects, vulnerabilities, and other operational issues. The "api-fuzzing-unhandled" vulnerability signifies that the Golang API infrastructure is not adequately designed or implemented to gracefully handle such inputs. Instead of rejecting anomalous data or managing errors robustly, the API may crash, hang, leak information, or exhibit other unintended behaviors.
 
-In the context of Golang infrastructure, this vulnerability is a significant concern because Go is often chosen for its performance and concurrency features in building scalable and resilient APIs. A failure to handle fuzzed inputs undermines these intended strengths, potentially leading to instability and security breaches. The core issue lies in the API's inability to validate and sanitize inputs effectively, manage resources under stress, or recover from unexpected internal states triggered by fuzzed data.**3** This vulnerability indicates a lack of defensive programming against a broad spectrum of potentially hostile inputs.
+In the context of Golang infrastructure, this vulnerability is a significant concern because Go is often chosen for its performance and concurrency features in building scalable and resilient APIs. A failure to handle fuzzed inputs undermines these intended strengths, potentially leading to instability and security breaches. The core issue lies in the API's inability to validate and sanitize inputs effectively, manage resources under stress, or recover from unexpected internal states triggered by fuzzed data. This vulnerability indicates a lack of defensive programming against a broad spectrum of potentially hostile inputs.
 
 ## **3. Technical Description (for security pros)**
 
-The "api-fuzzing-unhandled" vulnerability in Golang APIs manifests when the application's input processing logic fails to account for the wide variance of data that fuzzing tools can generate. Fuzzing inputs can range from simple oversized data, incorrect data types, and missing parameters to complex, structurally invalid payloads, character set anomalies, and injection strings.**1**
+The "api-fuzzing-unhandled" vulnerability in Golang APIs manifests when the application's input processing logic fails to account for the wide variance of data that fuzzing tools can generate. Fuzzing inputs can range from simple oversized data, incorrect data types, and missing parameters to complex, structurally invalid payloads, character set anomalies, and injection strings.
 
 In Golang, common failure modes resulting from unhandled fuzzed inputs include:
 
@@ -30,7 +30,7 @@ In Golang, common failure modes resulting from unhandled fuzzed inputs include:
     
 5. **Logic Flaws and Bypasses:** Fuzzing can uncover edge cases where input validation or business logic is flawed, potentially leading to unauthorized data access, modification, or bypass of security controls.
 
-The core technical issue is a gap in defensive coding: the API trusts or insufficiently validates external input, failing to anticipate the diverse and often malicious nature of data generated by fuzzing techniques.**5**
+The core technical issue is a gap in defensive coding: the API trusts or insufficiently validates external input, failing to anticipate the diverse and often malicious nature of data generated by fuzzing techniques.
 
 ## **4. Common Mistakes That Cause This**
 
@@ -156,7 +156,6 @@ func main() {
 	}
 }
 ```
-Associated Snippets: 10
 
 Vulnerability: Lack of http.MaxBytesReader before io.ReadAll allows unbounded memory allocation.
 
@@ -212,7 +211,6 @@ func main() {
 }
 ```
 
-Associated Snippets: Inspired by principles in 26 (general panic causes) and JSON handling.22
 
 Vulnerability: Dereferencing item.Count without checking if it's nil after JSON unmarshalling. A fuzzer can easily provide JSON where "count" is omitted or is not an integer, leading to item.Count being nil and causing a runtime panic.
 
@@ -251,7 +249,6 @@ func main() {
 }
 ```
 
-Associated Snippets: 14
 
 Vulnerability: Importing expvar registers an HTTP handler at /debug/vars by default. If this endpoint is not firewalled or protected by authentication in a production environment, it exposes sensitive runtime information (command line arguments, memory statistics, Go version, custom variables) to anyone who can access it. A fuzzer might discover this endpoint if it probes common paths.
 
@@ -598,74 +595,74 @@ Ultimately, mitigating the "api-fuzzing-unhandled" vulnerability requires a defe
 
 ## **15. References**
 
-- **1** thenewstack.io - API Fuzzing: What Is It and Why Should You Use It?
-- **2** aptori.dev - API Fuzz testing
-- **32** docs.gitlab.com - API Fuzzing
-- **3** akamai.com - Why Fuzzing Isn’t Enough to Test Your APIs for Security Issues
-- **16** pynt.io - API Security Breaches: Top Causes, Real Examples, and Prevention
-- **5** betterstack.com - Fuzz Testing Guide
-- **4** imperva.com - Fuzzing (Fuzz Testing)
-- **13** beyondsecurity.com - Defuzzing API Testing: The Search for Vulnerabilities
-- **7** owasp.org - Fuzzing
-- **29** owasp.org - WSTG - Appendix C: Fuzzing
-- **30** code-intelligence.com - What is Fuzz Testing?
-- **31** devops.com - Developers' Guide to Fuzz Testing
-- **8** blog.jealous.dev - Golang for Secure API Development
-- **9** hub.corgea.com - Go Lang Security Best Practices
-- **15** go.dev - Go Fuzzing
-- **28** go.dev - Tutorial: Fuzzing
-- **24** mionskowski.pl - Unmasking a Go HTML Parser Bug
-- **26** free5gc.org - Golang Fuzz Testing
-- **35** owasp.org - OWASP API Security Top 10 2023
-- **12** devguide.owasp.org - Go Secure Coding Practices
-- **40** go.dev - Go Vulnerability Database
-- **41** go.dev - Go Vulnerability Management
-- **42** github.com - Ardan Labs Go Training - Fuzzing
-- **43** academy.fuzzinglabs.com - Introduction to Go Fuzzing
-- **44** projectdiscovery.io - Nuclei Fuzzing for Unknown Vulnerabilities
-- **25** kondukto.io - Enhancing AppSec Through Fuzzing in CI/CD Pipelines
-- **18** reddit.com - Gorilla/CSRF Vulnerability Demo
-- **19** security.snyk.io - Snyk - gorilla/mux/otelmux Vulnerabilities
-- **20** deps.dev - gin-gonic/gin Security Advisories
-- **21** security.snyk.io - Snyk - gin-gonic/gin Vulnerabilities
-- **34** first.org - CVSS v4.0 FAQ
-- **33** ibm.com - Security Bulletin: Golang Vulnerabilities
-- **45** eyer.ai - API Fuzz Testing Guide
-- **4** imperva.com - Fuzzing (Fuzz Testing)
-- **17** ituonline.com - STRIDE Framework
-- **6** aquasec.com - Prometheus Servers Exposed to DoS Attacks
-- **15** go.dev - Go Fuzzing
-- **24** mionskowski.pl - Unmasking a Go HTML Parser Bug
-- **22** codingexplorations.com - Fuzz Testing in Go
-- **23** github.com - Go Issue #31309 (JSON Fuzzing)
-- **10** github.com - WhoDB Security Advisory GHSA-5pf6-cq2v-23ww
-- **11** resilientx.com - OWASP Top 10: Unrestricted Resource Consumption
-- **46** spectralops.io - Remote Code Execution Vulnerability Guide
-- **47** cyberark.com - How to Bypass Golang SSL Verification
-- **28** go.dev - Tutorial: Fuzzing
-- **27** parsiya.net - Learning Go-Fuzz 1: iprange
-- **48** github.com - CrowdStrike LogScale Go API Client Security Policy
-- **14** akto.io - Golang expvar Information Disclosure
-- **49** scholarscompass.vcu.edu - RESTful API Framework using Go
-- **50** github.com - Fuzz REST API PoC
-- **51** arxiv.org - DFUZZ: LLM-Driven Fuzzing for Deep Learning Libraries
-- **52** infosecinstitute.com - Intro to Fuzzing
-- **36** apisecurity.io - API4:2023 Unlimited Resource Consumption
-- **37** dev.to - Unrestricted Resource Consumption
-- **38** owasp.org - API1:2023 Broken Object Level Authorization
-- **39** learn.snyk.io - Broken Object Level Authorization
-- **5** betterstack.com - Fuzz Testing Guide (Derived)
-- **7** owasp.org - Fuzzing (Derived)
-- **30** code-intelligence.com - What is Fuzz Testing? (Derived)
-- **8** blog.jealous.dev - Golang for Secure API Development (Derived)
-- **9** hub.corgea.com - Go Lang Security Best Practices (Derived)
-- **15** go.dev - Go Fuzzing (Derived)
-- **26** free5gc.org - Golang Fuzz Testing (Derived)
-- **12** devguide.owasp.org - Go Secure Coding Practices (Derived)
-- **25** kondukto.io - Enhancing AppSec Through Fuzzing in CI/CD Pipelines (Derived)
-- **21** security.snyk.io - Snyk - gin-gonic/gin Vulnerabilities (Derived)
-- **33** ibm.com - Security Bulletin: Golang Vulnerabilities (Derived)
-- **10** github.com - WhoDB Security Advisory GHSA-5pf6-cq2v-23ww (Derived)
-- **27** parsiya.net - Learning Go-Fuzz 1: iprange (Derived)
-- **14** akto.io - Golang expvar Information Disclosure (Derived)
-- **11** resilientx.com - OWASP Top 10: Unrestricted Resource Consumption (Derived)
+- thenewstack.io - API Fuzzing: What Is It and Why Should You Use It?
+- aptori.dev - API Fuzz testing
+- docs.gitlab.com - API Fuzzing
+- akamai.com - Why Fuzzing Isn’t Enough to Test Your APIs for Security Issues
+- pynt.io - API Security Breaches: Top Causes, Real Examples, and Prevention
+- betterstack.com - Fuzz Testing Guide
+- imperva.com - Fuzzing (Fuzz Testing)
+- beyondsecurity.com - Defuzzing API Testing: The Search for Vulnerabilities
+- owasp.org - Fuzzing
+- owasp.org - WSTG - Appendix C: Fuzzing
+- code-intelligence.com - What is Fuzz Testing?
+- devops.com - Developers' Guide to Fuzz Testing
+- blog.jealous.dev - Golang for Secure API Development
+- hub.corgea.com - Go Lang Security Best Practices
+- go.dev - Go Fuzzing
+- go.dev - Tutorial: Fuzzing
+- mionskowski.pl - Unmasking a Go HTML Parser Bug
+- free5gc.org - Golang Fuzz Testing
+- owasp.org - OWASP API Security Top 10 2023
+- devguide.owasp.org - Go Secure Coding Practices
+- go.dev - Go Vulnerability Database
+- go.dev - Go Vulnerability Management
+- github.com - Ardan Labs Go Training - Fuzzing
+- academy.fuzzinglabs.com - Introduction to Go Fuzzing
+- projectdiscovery.io - Nuclei Fuzzing for Unknown Vulnerabilities
+- kondukto.io - Enhancing AppSec Through Fuzzing in CI/CD Pipelines
+- reddit.com - Gorilla/CSRF Vulnerability Demo
+- security.snyk.io - Snyk - gorilla/mux/otelmux Vulnerabilities
+- deps.dev - gin-gonic/gin Security Advisories
+- security.snyk.io - Snyk - gin-gonic/gin Vulnerabilities
+- first.org - CVSS v4.0 FAQ
+- ibm.com - Security Bulletin: Golang Vulnerabilities
+- eyer.ai - API Fuzz Testing Guide
+- imperva.com - Fuzzing (Fuzz Testing)
+- ituonline.com - STRIDE Framework
+- aquasec.com - Prometheus Servers Exposed to DoS Attacks
+- go.dev - Go Fuzzing
+- mionskowski.pl - Unmasking a Go HTML Parser Bug
+- codingexplorations.com - Fuzz Testing in Go
+- github.com - Go Issue #31309 (JSON Fuzzing)
+- github.com - WhoDB Security Advisory GHSA-5pf6-cq2v-23ww
+- resilientx.com - OWASP Top 10: Unrestricted Resource Consumption
+- spectralops.io - Remote Code Execution Vulnerability Guide
+- cyberark.com - How to Bypass Golang SSL Verification
+- go.dev - Tutorial: Fuzzing
+- parsiya.net - Learning Go-Fuzz 1: iprange
+- github.com - CrowdStrike LogScale Go API Client Security Policy
+- akto.io - Golang expvar Information Disclosure
+- scholarscompass.vcu.edu - RESTful API Framework using Go
+- github.com - Fuzz REST API PoC
+- arxiv.org - DFUZZ: LLM-Driven Fuzzing for Deep Learning Libraries
+- infosecinstitute.com - Intro to Fuzzing
+- apisecurity.io - API4:2023 Unlimited Resource Consumption
+- dev.to - Unrestricted Resource Consumption
+- owasp.org - API1:2023 Broken Object Level Authorization
+- learn.snyk.io - Broken Object Level Authorization
+- betterstack.com - Fuzz Testing Guide (Derived)
+- owasp.org - Fuzzing (Derived)
+- code-intelligence.com - What is Fuzz Testing? (Derived)
+- blog.jealous.dev - Golang for Secure API Development (Derived)
+- hub.corgea.com - Go Lang Security Best Practices (Derived)
+- go.dev - Go Fuzzing (Derived)
+- free5gc.org - Golang Fuzz Testing (Derived)
+- devguide.owasp.org - Go Secure Coding Practices (Derived)
+- kondukto.io - Enhancing AppSec Through Fuzzing in CI/CD Pipelines (Derived)
+- security.snyk.io - Snyk - gin-gonic/gin Vulnerabilities (Derived)
+- ibm.com - Security Bulletin: Golang Vulnerabilities (Derived)
+- github.com - WhoDB Security Advisory GHSA-5pf6-cq2v-23ww (Derived)
+- parsiya.net - Learning Go-Fuzz 1: iprange (Derived)
+- akto.io - Golang expvar Information Disclosure (Derived)
+- resilientx.com - OWASP Top 10: Unrestricted Resource Consumption (Derived)

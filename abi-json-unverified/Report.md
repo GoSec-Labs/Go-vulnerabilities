@@ -8,17 +8,17 @@ This title clearly identifies the vulnerability concerning the Application Binar
 
 ## **2. Severity Rating**
 
-The severity of this vulnerability is rated as **High**. The Common Vulnerability Scoring System (CVSS) provides a standardized framework for assessing this severity.
+The severity of this vulnerability is rated as **High🟠**. The Common Vulnerability Scoring System (CVSS) provides a standardized framework for assessing this severity.
 
 **CVSS v3.1:**
 
 - **Vector:** `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H`
-- **Base Score:** 7.5 (High)
+- **Base Score:** 7.5 (High🟠)
 
 **CVSS v4.0:**
 
 - **Vector:** `CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N`
-- **Base Score:** 7.3 (High)
+- **Base Score:** 7.3 (High🟠)
 
 The scoring reflects the potential for significant impact, primarily on Availability, with relatively low complexity for an attacker to exploit certain vectors, especially Denial of Service.
 
@@ -44,7 +44,7 @@ The high availability impact stems from the relative ease with which a malformed
 
 This vulnerability, `abi.JSON parsing from unverified input` (or `abi-json-unverified`), arises when software components parse Application Binary Interface (ABI) specifications provided in JSON format from untrusted or unverified sources without adequate validation. This is particularly relevant for Golang-based blockchain infrastructure and applications that interact with the Ethereum Virtual Machine (EVM).
 
-The ABI is a cornerstone in blockchain ecosystems, serving as a JSON definition that describes how to interact with smart contract functions and events.**1** It dictates the function names, parameter types, return types, event structures, and state mutability, essentially forming the bridge between off-chain applications and on-chain smart contract bytecode.**1**
+The ABI is a cornerstone in blockchain ecosystems, serving as a JSON definition that describes how to interact with smart contract functions and events. It dictates the function names, parameter types, return types, event structures, and state mutability, essentially forming the bridge between off-chain applications and on-chain smart contract bytecode.
 
 When an application processes an ABI JSON from an unverified source—such as a user upload, a third-party API, or a public data feed—without rigorous validation, it exposes itself to several risks. A malicious actor can craft an ABI JSON that, when parsed, leads to issues like Denial of Service (DoS) through resource exhaustion, application instability, or even incorrect on-chain interactions if the parsed (and potentially corrupted) ABI data is used to construct transactions or interpret contract outputs. The "unverified" nature of the input is central; if ABIs are reliably sourced and their integrity is guaranteed, this specific vulnerability is largely mitigated. However, the dynamic nature of blockchain interactions often necessitates handling ABIs from diverse, potentially untrustworthy sources.
 
@@ -75,9 +75,9 @@ The specification allows for considerable complexity, such as deeply nested tupl
 
 ### **4.2. ABI JSON Parsing in Golang (go-ethereum)**
 
-In the Golang ecosystem, particularly for applications interacting with Ethereum, the `go-ethereum/accounts/abi` package is commonly used for ABI handling. The primary function for parsing ABI JSON is `abi.JSON(reader io.Reader) (ABI, error)`.**4** This function takes an `io.Reader` as input, decodes the JSON data, and populates an `abi.ABI` struct, which contains maps of `Methods`, `Events`, and `Errors`, along with `Constructor`, `Fallback`, and `Receive` function details.**4**
+In the Golang ecosystem, particularly for applications interacting with Ethereum, the `go-ethereum/accounts/abi` package is commonly used for ABI handling. The primary function for parsing ABI JSON is `abi.JSON(reader io.Reader) (ABI, error)`. This function takes an `io.Reader` as input, decodes the JSON data, and populates an `abi.ABI` struct, which contains maps of `Methods`, `Events`, and `Errors`, along with `Constructor`, `Fallback`, and `Receive` function details.
 
-Crucially, `abi.JSON()` internally uses Go's standard `encoding/json` package, specifically `json.NewDecoder(reader).Decode(&abi)`.**4** This means that the behavior and potential vulnerabilities of `abi.JSON()` are partly inherited from the underlying `encoding/json` package. For instance, if `encoding/json` has known issues related to resource consumption for certain JSON structures, these could be exposed through `abi.JSON()` unless `go-ethereum` implements specific mitigations or the calling application takes preemptive measures (like limiting input size).
+Crucially, `abi.JSON()` internally uses Go's standard `encoding/json` package, specifically `json.NewDecoder(reader).Decode(&abi)`. This means that the behavior and potential vulnerabilities of `abi.JSON()` are partly inherited from the underlying `encoding/json` package. For instance, if `encoding/json` has known issues related to resource consumption for certain JSON structures, these could be exposed through `abi.JSON()` unless `go-ethereum` implements specific mitigations or the calling application takes preemptive measures (like limiting input size).
 
 A practical example of its usage is:
 
@@ -120,11 +120,11 @@ This is often the most direct attack. Maliciously crafted ABI JSONs can cause th
     
 - **Numerous Elements:** An ABI JSON defining an enormous number of functions, events, or parameters, or containing strings of excessive length, can also lead to high memory or CPU usage during parsing and population of the `abi.ABI` struct.
 
-The Common Weakness Enumeration CWE-400 (Uncontrolled Resource Consumption) directly applies here.**12** The lack of limits on input size, nesting depth, or array/object element counts within the parser or the calling application creates this vulnerability. Go vulnerabilities related to resource exhaustion in various parsers have been documented.**13**
+The Common Weakness Enumeration CWE-400 (Uncontrolled Resource Consumption) directly applies here. The lack of limits on input size, nesting depth, or array/object element counts within the parser or the calling application creates this vulnerability. Go vulnerabilities related to resource exhaustion in various parsers have been documented.
 
 #### **4.4.2. Application Logic Manipulation/Corruption via Parser Inconsistencies (CWE-20)**
 
-More subtle attacks can exploit quirks or inconsistencies in how the JSON parser interprets the ABI data. If the parsed ABI object is then used to make security-sensitive decisions or construct on-chain transactions, these inconsistencies can lead to incorrect application behavior or facilitate further exploits. This falls under CWE-20 (Improper Input Validation) **16**, as the parser isn't strictly enforcing the semantic correctness and uniqueness implied by the ABI's role.
+More subtle attacks can exploit quirks or inconsistencies in how the JSON parser interprets the ABI data. If the parsed ABI object is then used to make security-sensitive decisions or construct on-chain transactions, these inconsistencies can lead to incorrect application behavior or facilitate further exploits. This falls under CWE-20 (Improper Input Validation), as the parser isn't strictly enforcing the semantic correctness and uniqueness implied by the ABI's role.
 
 - **Duplicate Keys:** The JSON specification is ambiguous on handling duplicate keys within an object. Some parsers might take the first occurrence, some the last, and others might error. If `encoding/json` (or the logic in `abi.UnmarshalJSON`) has a predictable behavior (e.g., last-write-wins), an attacker could provide a benign value for a key (e.g., `stateMutability: "nonpayable"`) and then override it with a malicious one (`stateMutability: "payable"`) later in the same function definition. If the application uses this manipulated `stateMutability` to decide whether to send Ether with a transaction, it could lead to errors or unintended behavior.
     
@@ -135,7 +135,7 @@ These manipulations aim to alter how the application perceives the smart contrac
 
 #### **4.4.3. Information Disclosure or Further Exploitation**
 
-This is often a secondary impact. If a malformed ABI JSON triggers an error during parsing, and the application's error handling is poor (CWE-754: Improper Check for Unusual or Exceptional Conditions **7**), verbose error messages might be returned to the attacker or logged insecurely. These messages could leak internal system details, such as stack traces, library versions, or internal variable states, aiding an attacker in reconnaissance for further attacks (related to CWE-200: Exposure of Sensitive Information to an Unauthorized Actor).
+This is often a secondary impact. If a malformed ABI JSON triggers an error during parsing, and the application's error handling is poor (CWE-754: Improper Check for Unusual or Exceptional Conditions), verbose error messages might be returned to the attacker or logged insecurely. These messages could leak internal system details, such as stack traces, library versions, or internal variable states, aiding an attacker in reconnaissance for further attacks (related to CWE-200: Exposure of Sensitive Information to an Unauthorized Actor).
 
 **Table: Attack Vector Summary**
 
@@ -438,8 +438,6 @@ Addressing the `abi-json-unverified` vulnerability requires a defense-in-depth a
 
 - **1. Validate and Sanitize All Untrusted ABI JSON Input (CWE-20):**
     - **Schema Validation:** Before attempting to parse an ABI JSON from an untrusted source, validate its structure and content against the official Solidity ABI JSON specification. This can be achieved using a robust JSON schema validator library for Go. The schema should enforce correct types, required fields (e.g., `name`, `type`, `inputs` for functions), valid `stateMutability` values, and appropriate structure for `components` in tuples.
-        
-        **3**
         
     - **Content Limiting:** Enforce reasonable limits on string lengths within the JSON (e.g., for names, types), the number of elements in arrays (e.g., `inputs`, `outputs`, top-level array of definitions), and the maximum nesting depth of `components` or other JSON structures. This helps prevent abuse of overly complex but syntactically valid JSON.
 - **2. Use `io.LimitReader` for Untrusted Streams:**
