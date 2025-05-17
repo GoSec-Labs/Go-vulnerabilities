@@ -595,36 +595,36 @@ Essentially, while Go itself offers a development experience characterized by si
 The findings in this report are based on an analysis of various sources, including technical discussions, security bulletins, and official documentation.
 
 - **CGO Risks & Best Practices:**
-    - **3**: Reddit - Why CGO is dangerous (General discussion on CGO pitfalls).
-    - **4**: Google Groups - Discussion on C vulnerabilities via CGO.
-    - **17**: Golang 50 Shades - Common CGO mistakes.
-    - **15**: Reddit - CGO best practices (Memory, wrappers).
-    - **19**: Reddit - Is it bad to use CGO? (Portability, performance, maintenance).
-    - **16**: Go Packages - runtime/cgo (Official CGO documentation, Handle usage).
+    - Reddit - Why CGO is dangerous (General discussion on CGO pitfalls).
+    - Google Groups - Discussion on C vulnerabilities via CGO.
+    - Golang 50 Shades - Common CGO mistakes.
+    - Reddit - CGO best practices (Memory, wrappers).
+    - Reddit - Is it bad to use CGO? (Portability, performance, maintenance).
+    - Go Packages - runtime/cgo (Official CGO documentation, Handle usage).
 - **Python Integration:**
-    - **8**: Datadog Blog - CGO and Python (Embedding CPython, GIL).
-    - **24**: Tyk.io - Rich Plugins (CGO as bridge for Python, message passing).
-    - **25**: Dev.to - Call Go Code in Python (Building DLLs with CGO).
+    - Datadog Blog - CGO and Python (Embedding CPython, GIL).
+    - Tyk.io - Rich Plugins (CGO as bridge for Python, message passing).
+    - Dev.to - Call Go Code in Python (Building DLLs with CGO).
 - **JavaScript/Node.js Integration:**
-    - **9**: Reddit - Golang Plugin System: Run JavaScript Plugins in Go (goja, security, concurrency).
-    - **26**: Dev.to - Node.js vs Golang (General comparison, V8 context).
-    - **27**: Stack Overflow - Node.js and V8 (V8 as JS engine).
+    - Reddit - Golang Plugin System: Run JavaScript Plugins in Go (goja, security, concurrency).
+    - Dev.to - Node.js vs Golang (General comparison, V8 context).
+    - Stack Overflow - Node.js and V8 (V8 as JS engine).
 - **Build-Time Vulnerabilities & CVEs:**
-    - **10**: IBM Security Bulletin (CVE-2024-24787, CVE-2023-39325, CVE-2024-24785).
-    - **14**: Stack Overflow - CVE issue due to go binary (LDFLAGS, gccgo).
-    - **13**: NVD - CVE-2025-22867 (Darwin CGO build ACE).
-    - **1**: Twingate - CVE-2023-29404 (CGO LDFLAGS ACE).
-    - **12**: Twingate - CVE-2023-29402 (CGO code injection, newline in dir names).
+    - IBM Security Bulletin (CVE-2024-24787, CVE-2023-39325, CVE-2024-24785).
+    - Stack Overflow - CVE issue due to go binary (LDFLAGS, gccgo).
+    - NVD - CVE-2025-22867 (Darwin CGO build ACE).
+    - Twingate - CVE-2023-29404 (CGO LDFLAGS ACE).
+    - Twingate - CVE-2023-29402 (CGO code injection, newline in dir names).
 - **Memory Management & Safety:**
-    - **6**: Hypermode Blog - Manual Memory Management in Go using jemalloc (CGO memory allocation).
-    - **2**: MemorySafety.org - What is memory safety?
-    - **5**: Infosec Institute - How to exploit Buffer Overflow.
+    - Hypermode Blog - Manual Memory Management in Go using jemalloc (CGO memory allocation).
+    - MemorySafety.org - What is memory safety?
+    - Infosec Institute - How to exploit Buffer Overflow.
 - **Plugin Security (General):**
-    - **11**: Eunomia - Security Vulnerabilities Study in Software Extensions and Plugins.
+    - Eunomia - Security Vulnerabilities Study in Software Extensions and Plugins.
 - **Detection & Secure Coding:**
-    - **22**: JetBrains - Find vulnerable and malicious dependencies (GoLand).
-    - **21**: GitHub - poonai/cgoleak (CGO memory leak detector).
-    - **23**: OWASP - Go Secure Coding Practices.
-    - **20**: Go Blog - Security Best Practices for Go Developers (govulncheck, fuzzing, race detector).
+    - JetBrains - Find vulnerable and malicious dependencies (GoLand).
+    - GitHub - poonai/cgoleak (CGO memory leak detector).
+    - OWASP - Go Secure Coding Practices.
+    - Go Blog - Security Best Practices for Go Developers (govulncheck, fuzzing, race detector).
 
 The diverse range of these references—spanning official Go documentation, security bulletins from vendors like IBM, technical blogs from industry practitioners, extensive community discussions on platforms like Reddit and Stack Overflow, and entries in vulnerability databases—all converge to highlight the multifaceted and significant nature of these security challenges. This broad corroboration underscores that the risks associated with CGO and plugin integration are widely recognized and require careful consideration by developers and security professionals.
