@@ -254,7 +254,7 @@ This Proof of Concept demonstrates how the `vulnerableHandler` function from Sec
 
 **Steps to Reproduce:**
 
-1. Baseline Test (Legitimate Request):
+**1. Baseline Test (Legitimate Request):**
     
     Open a web browser or use a command-line tool like curl to send a legitimate request:
     
@@ -262,7 +262,7 @@ This Proof of Concept demonstrates how the `vulnerableHandler` function from Sec
     
     - **Expected Output:** The server should respond with:
     User provided: world
-2. Injecting a Simple Command (whoami):
+**2. Injecting a Simple Command (whoami):**
     
     Craft a URL that injects a command using a semicolon (;) as a command separator. The semicolon allows a second command to be executed after the echo command.
     
@@ -276,7 +276,7 @@ This Proof of Concept demonstrates how the `vulnerableHandler` function from Sec
     User provided: world
     appuser
     The output of `whoami` (e.g., `appuser`) is appended to the output of the `echo` command. This confirms that the `whoami` command was executed on the server.
-3. Injecting a Command to Read a File (e.g., /etc/hostname or a test file):
+**3. Injecting a Command to Read a File (e.g., /etc/hostname or a test file):**
     
     Attempt to read a file from the server. For demonstration, let's assume a file /tmp/testfile.txt exists on the server with the content "Hello from testfile".
     
@@ -288,7 +288,7 @@ This Proof of Concept demonstrates how the `vulnerableHandler` function from Sec
     User provided: world
     Hello from testfile
     If `/etc/passwd` were readable by the application's user, `param=world;%20cat%20/etc/passwd` could be used.
-4. Injecting a Command Causing a Time Delay (sleep):
+**4. Injecting a Command Causing a Time Delay (sleep):**
     
     This PoC demonstrates command execution by introducing an observable delay.
     
@@ -468,10 +468,4 @@ Key prevention and remediation strategies for Go developers include:
 
 The persistence of command injection vulnerabilities across various systems and languages underscores the ongoing need for developer education, secure coding practices, robust testing methodologies (including SAST and DAST), and a defense-in-depth security posture. While tools and language features can aid in prevention, a foundational understanding of how these vulnerabilities occur and a commitment to secure design principles are paramount for mitigating this significant threat.
 
-## **References**
- X
- X
- X
- X
- X
  
