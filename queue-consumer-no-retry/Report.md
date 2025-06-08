@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Vulnerability Report: No Retry on Consumer Crash: Data Loss and System Instability in Message-Driven Go Applications (short queue-consumer-no-retry)
 
 ## 1. Vulnerability Title
@@ -395,3 +396,6 @@ The "No retry on consumer crash, short queue-consumer-no-retry" vulnerability re
 - https://docs.byteplus.com/id/docs/kafka/viewing-monitoring-data
 - https://github.com/nats-io/nats-server/discussions/4928
 - https://stackoverflow.com/questions/11604636/how-to-handle-consumer-failures-in-queue-based-systems/
+=======
+TODO
+>>>>>>> ed021a5a47365adec7b2c027b27ed71d9ed65e71
