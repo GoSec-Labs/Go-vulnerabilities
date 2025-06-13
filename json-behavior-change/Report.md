@@ -102,7 +102,7 @@ The `encoding/json` package has also seen the addition of features, primarily on
     Prior to Go 1.15, deeply nested JSON structures could cause the encoding/json decoder to consume excessive stack space, potentially leading to a stack overflow and program termination.13 This represented a denial-of-service vulnerability. Go 1.15 introduced an internal, non-configurable limit (reportedly 10,000 levels of nesting) on recursion depth during JSON decoding.13 This change, associated with issue #31789 and CL 199837, significantly hardened the parser against such attacks by making it error out before exhausting stack resources.13 While not an API change, this internal behavioral modification was a critical security enhancement.
     
 
-### **2.4. Undocumented or Subtle Behaviors and Pitfalls**
+### 2.4. Undocumented or Subtle Behaviors and Pitfalls
 
 Beyond documented changes and explicit options, `encoding/json` has exhibited subtle behaviors that can be pitfalls for unwary developers.
 
